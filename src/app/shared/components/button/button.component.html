@@ -1,0 +1,11 @@
+<button
+  class="button"
+  [class.outline]="buttonType === 'outline'"
+  [class.transparent]="buttonType === 'transparent'"
+  [class.danger]="buttonType === 'danger'"
+  [class.disabled]="disabled"
+  [disabled]="disabled"
+  (click)="onClick.emit($event)"
+>
+  <ng-content></ng-content>
+</button>

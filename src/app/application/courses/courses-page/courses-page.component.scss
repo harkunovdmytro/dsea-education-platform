@@ -1,0 +1,12 @@
+@import "variables";
+@import "page";
+
+.courses {
+  padding: 30px 0 0;
+  margin: 20px 0 0;
+  border-top: 1px solid #b9b5c9;
+
+  .course-item {
+    margin-bottom: 20px;
+  }
+}

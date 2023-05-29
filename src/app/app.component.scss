@@ -1,0 +1,15 @@
+@import "variables";
+
+.app {
+  display: flex;
+  background-color: $grey;
+
+  .sidebar-container {
+    width: $sidebar-width;
+    min-height: 100vh;
+  }
+
+  .header-content {
+    flex-grow: 1;
+  }
+}

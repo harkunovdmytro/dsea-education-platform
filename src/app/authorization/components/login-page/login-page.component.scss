@@ -1,0 +1,63 @@
+@import "variables";
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+
+  .card {
+    width: min(400px, 100%);
+    margin: auto;
+
+    .card-header {
+      text-align: center;
+      img {
+        height: 200px;
+        margin: auto;
+        text-align: center;
+      }
+    }
+
+    .card-body {
+      width: 100%;
+      color: $white;
+      background-color: #313467;
+      border-radius: 15px;
+
+      .text {
+        width: 100%;
+        padding: 30px ;
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      form {
+        width: 100%;
+        padding: 20px;
+
+        input {
+          width: 100%;
+          font-size: 16px;
+          padding: 20px;
+          margin-bottom: 20px;
+          border: none;
+          border-bottom: 2px solid $grey;
+          background-color: #313467;
+          outline: none;
+        }
+      }
+    }
+  }
+}
+
+
+button {
+  display: block;
+  background: $white;
+  color: $blue;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px;
+  margin-top: 30px;
+}

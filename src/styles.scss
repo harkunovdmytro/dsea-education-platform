@@ -1,1 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+@import "variables";
+@import "fonts";
+@import "ngx-smart-modal";
+
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  display: inline-block;
+  color: $black;
+  text-decoration: none;
+}
+
+select {
+  height: $input-height;
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border-width: 1px;
+  border-color: $blue-darker;
+  color: $blue-darker;
+  font-size: 16px;
+
+  &::placeholder {
+    color: $grey-darker;
+  }
+
+  &:disabled {
+    border-color: $grey-darker;
+    color: $grey-darker;
+    cursor: not-allowed;
+  }
+}
+
+/* Importing Bootstrap SCSS file. */
+@import "./node_modules/bootstrap/scss/bootstrap";

@@ -1,0 +1,121 @@
+<ngx-smart-modal
+    #modal
+    [identifier]="identifier"
+    [closable]="true"
+    [escapable]="true"
+    [backdrop]="true"
+    [target]="'body'"
+    (onDataAdded)="handleAddedDataModal($event)"
+    (onAnyCloseEventFinished)="handleCloseModal(); modal.removeData()"
+>
+  <div class="modal-content">
+    <form (ngSubmit)="$event.preventDefault(); submitForm()">
+      <div class="modal-header">
+        {{ (isForEdit ? 'Редагування' : 'Створення') + ' користувача'}}
+      </div>
+      <div class="modal-body">
+        <div class="form-wrapper">
+          <label>
+            <span>Прізвище</span>
+            <app-input type="text" placeholder="Прізвище" [control]="userForm.controls.lastName"></app-input>
+          </label>
+
+          <label>
+            <span>Ім'я</span>
+            <app-input type="text" placeholder="Ім'я" [control]="userForm.controls.name"></app-input>
+          </label>
+
+          <label>
+            <span>По батькові</span>
+            <app-input type="text" placeholder="По батькові" [control]="userForm.controls.fathersName"></app-input>
+          </label>
+
+          <label>
+            <span>Тип користувача</span>
+            <select [formControl]="userForm.controls.userType">
+              <option
+                disabled
+                [value]="null"
+                [selected]="!isForEdit"
+              >Тип користувача</option>
+              <option [value]="userTypes.Student">Студент</option>
+              <option [value]="userTypes.Teacher">Викладач</option>
+              <option [value]="userTypes.Administrator">Адміністратор</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Електрона пошта</span>
+            <app-input type="email" placeholder="Електрона пошта" [control]="userForm.controls.email"></app-input>
+          </label>
+
+          <label>
+            <span>Пароль</span>
+            <app-input type="password" placeholder="Пароль" [control]="userForm.controls.password"></app-input>
+          </label>
+
+          <label>
+            <span>Факультет</span>
+            <span *ngIf="(userForm.controls.userType.value || userTypes.Student) <= userTypes.Teacher">*</span>
+            <select
+              [formControl]="userForm.controls.facultyId"
+              [required]="(userForm.controls.userType.value || userTypes.Student) <= userTypes.Teacher"
+              (input)="userForm.controls.departmentId.enable()"
+            >
+                 <option
+                   disabled
+                   [value]="null"
+                   [selected]="!isForEdit"
+                 >Факультет</option>
+              <option *ngFor="let faculty of (faculties$ | async)" [value]="faculty.id">{{faculty.shortName}}</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Кафедра</span>
+            <span *ngIf="(userForm.controls.userType.value || userTypes.Student) <= userTypes.Teacher">*</span>
+            <select
+              [formControl]="userForm.controls.departmentId"
+              [required]="(userForm.controls.userType.value || userTypes.Student) <= userTypes.Teacher"
+              (input)="userForm.controls.groupId.enable()"
+            >
+              <option
+                disabled
+                [value]="null"
+                [selected]="!isForEdit"
+              >Кафедра</option>
+              <option
+                *ngFor="let department of (departments$ | async)"
+                [value]="department.id"
+              >{{department.shortName}}</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Група</span>
+            <select
+              [formControl]="userForm.controls.groupId"
+              [required]="(userForm.controls.userType.value || userTypes.Student) < userTypes.Teacher"
+            >
+              <option
+                disabled
+                [value]="null"
+                [selected]="!isForEdit"
+              >Група</option>
+              <option
+                *ngFor="let group of (groups$ | async)"
+                [value]="group.id"
+              >{{group.shortName}}</option>
+            </select>
+          </label>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button (onClick)="$event.preventDefault(); modal.close()">Cancel</app-button>
+        <app-button [disabled]="userForm.invalid">Submit</app-button>
+      </div>
+    </form>
+  </div>
+</ngx-smart-modal>
+

@@ -1,0 +1,43 @@
+<div class="page">
+  <h1>Групи</h1>
+
+  <section class="content">
+    <div class="control-panel">
+      <app-button (onClick)="openModal()">Створити нову групу</app-button>
+    </div>
+    <div class="faculties">
+      <ng-container *ngIf="groupForView$ | async as groups">
+        <div *ngFor="let faculty of groups" class="faculty-item">
+          <ng-container *ngIf="faculty.facultyGroups">
+            <h2 class="faculty-header">{{ faculty.faculty.shortName }}</h2>
+
+            <div class="departments">
+              <div *ngFor="let department of faculty.departments">
+                <ng-container *ngIf="department.groups.length">
+                  <div class="department-item">
+                    <h3>{{ department.department.shortName }}</h3>
+
+                    <div class="groups">
+                      <div *ngFor="let group of department.groups" class="group-item">
+                        <app-group-item
+                          [group]="group"
+                          (onDeleteGroup)="deleteGroup($event)"
+                          (onEditGroup)="openModal($event)"
+                        ></app-group-item>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </section>
+</div>
+
+<app-create-edit-group-modal
+  (onSubmitCreate)="createGroup($event)"
+  (onSubmitEdit)="editGroup($event)"
+></app-create-edit-group-modal>

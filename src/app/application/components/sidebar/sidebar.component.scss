@@ -1,0 +1,81 @@
+@import "variables";
+
+.sidebar {
+  background-color: $blue;
+  height: 100%;
+
+  .logo {
+    padding: 30px 10px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+
+    img {
+      max-width: 60%;
+    }
+  }
+
+  .menu {
+    .menu-item {
+
+      .menu-item-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .menu-link {
+        padding: 10px 0;
+        width: 100%;
+        color: $white;
+        font-weight: $font-weight-normal;
+
+        .menu-link-text {
+          display: inline-block;
+          padding: 8px 20px;
+          border-left: 4px solid transparent;
+        }
+
+        &.active {
+          font-weight: $font-weight-semibold;
+
+          .menu-link-text {
+            border-left-color: $orange;
+          }
+        }
+
+        &:hover {
+          background-color: $blue-lighten;
+        }
+      }
+
+      .sub-menu-toggle {
+        display: inline-block;
+        width: 55px;
+        height: 55px;
+        padding:10px;
+        border: none;
+        background-color: inherit;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $blue-lighten;
+        }
+
+        svg {
+          color: $white;
+          width: 100%;
+
+          &.opened {
+            transform-origin: center center;
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+
+    .sub-menu {
+      margin-left: 30px;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<ngx-smart-modal
+  #modal
+  [identifier]="identifier"
+  [closable]="true"
+  [escapable]="true"
+  [backdrop]="true"
+  [target]="'body'"
+  (onDataAdded)="handleAddedDataModal($event)"
+  (onAnyCloseEventFinished)="handleCloseModal(); modal.removeData()"
+>
+  <div class="modal-content">
+    <form (ngSubmit)="submitFaculty()">
+      <div class="modal-header">
+        {{ (isForEdit ? 'Редагування' : 'Створення') + ' факультету'}}
+      </div>
+      <div class="modal-body">
+        <div class="form-wrapper">
+          <label>
+            <span>Назва</span>
+            <app-input type="text" placeholder="Название" [control]="facultyForm.controls.name"></app-input>
+          </label>
+          <label>
+            <span>Корота назва</span>
+            <app-input type="text" placeholder="Короткое название" [control]="facultyForm.controls.shortName"></app-input>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button (onClick)="$event.preventDefault(); modal.close()">Відмінити</app-button>
+        <app-button (onClick)="$event.preventDefault(); submitFaculty(); modal.close()">Створити</app-button>
+      </div>
+    </form>
+  </div>
+</ngx-smart-modal>
+

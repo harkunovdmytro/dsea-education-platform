@@ -1,0 +1,58 @@
+@import "variables";
+
+.button {
+  height: $control-height;
+  padding: 10px 20px;
+  border: none;
+  border-radius: calc($control-height / 4);
+  background-color: $blue;
+  color: $white;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+
+  &:hover {
+    color: $white;
+    background-color: $blue-lighten;
+  }
+
+  &.transparent {
+    background-color: transparent;
+    color: $blue;
+
+    &:hover {
+      box-shadow: $no-color-shadow rgba(72, 76, 151, 0.3);
+    }
+  }
+
+  &.outline {
+    color: $blue;
+    background-color: transparent;
+    border: 1px solid $blue;
+
+    &:hover {
+      color: $white;
+      background-color: $blue;
+    }
+  }
+
+  &.danger {
+    color: $white;
+    background-color: $orange;
+    border: none;
+
+    &:hover {
+      color: $white;
+      background-color: $orange-lighter;
+    }
+  }
+
+  &.disabled,
+  &.disabled :hover {
+    border: none;
+    color: $white;
+    background-color: $grey-darker !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+  }
+}

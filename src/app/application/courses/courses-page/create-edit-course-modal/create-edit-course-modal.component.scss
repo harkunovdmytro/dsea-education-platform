@@ -1,0 +1,87 @@
+@import "variables";
+
+.modal-content {
+
+  .modal-header {
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: $font-weight-semibold;
+  }
+
+  .modal-body {
+    .form-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      span {
+        color: $black;
+      }
+
+      input, textarea, select {
+        width: 100%;
+        margin-top: 5px;
+      }
+    }
+
+    .teachers, .groups {
+      border: solid 1px $grey-darker;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      max-height: 500px;
+      border-radius: 8px;
+      overflow: hidden;
+
+      ul {
+        max-height: 100%;
+        padding: 0;
+        overflow-y: auto;
+        margin-bottom: 0;
+
+        li {
+          cursor: pointer;
+          width: 100%;
+
+          :hover {
+            background-color: $grey;
+          }
+
+          button {
+            width: 100%;
+            border: none;
+            outline: none;
+            background-color: inherit;
+            padding: 15px;
+          }
+        }
+
+        .list-header {
+          text-align: center;
+          width: 100%;
+          padding: 5px;
+          background-color: $grey;
+          color: $blue;
+          border-bottom: 1px solid $grey-darker;
+        }
+
+        &:nth-child(2) {
+          border-left: solid 1px $grey-darker;
+        }
+      }
+    }
+  }
+
+  .modal-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+:host::ng-deep {
+  .nsm-dialog {
+    max-width: 800px;
+  }
+}

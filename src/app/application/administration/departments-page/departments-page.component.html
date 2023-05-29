@@ -1,0 +1,32 @@
+<div class="page">
+  <h1>Кафедри</h1>
+
+  <section class="content">
+    <div class="control-panel">
+      <app-button (onClick)="openModal()">Створити нову кафедру</app-button>
+    </div>
+    <div class="faculties">
+      <ng-container *ngFor="let faculty of facultiesForView$ | async">
+        <div *ngIf="faculty.departments.length" class="faculty-item">
+          <h2 class="faculty-header">{{ faculty.faculty.shortName }}</h2>
+
+          <div class="departments">
+            <ng-container *ngFor="let department of faculty.departments">
+              <app-department-item
+                [department]="department"
+                (onDeleteDepartment)="deleteDepartment($event)"
+                (onEditDepartment)="openModal($event)"
+              ></app-department-item>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </section>
+</div>
+
+<app-create-edit-department-modal
+  [faculties$]="faculties$"
+  (onSubmitCreate)="createDepartment($event)"
+  (onSubmitEdit)="editDepartment($event)"
+></app-create-edit-department-modal>

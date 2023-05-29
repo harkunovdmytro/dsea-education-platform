@@ -1,0 +1,17 @@
+@import "variables";
+@import "page";
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  a {
+    padding: 20px 30px;
+    border-radius: 15px;
+    color: $blue-darker;
+    font-size: 20px;
+    background-color: $white;
+    text-decoration: none;
+  }
+}

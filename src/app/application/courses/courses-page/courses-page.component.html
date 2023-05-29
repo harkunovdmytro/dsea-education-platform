@@ -1,0 +1,22 @@
+<div class="page">
+  <h1>Курси</h1>
+  <section>
+    <div *ngIf="((userType$ | async) || userTypes.Student) > userTypes.Student" class="control-panel">
+      <app-button (onClick)="openModal()">Створити новий курс</app-button>
+    </div>
+    <ul class="courses">
+      <li *ngFor="let course of courses$ | async" class="course-item">
+        <app-course-item
+          [course]="course"
+          (onEditCourse)="openModal($event)"
+          (onDeleteCourse)="deleteCourse($event)"
+        ></app-course-item>
+      </li>
+    </ul>
+  </section>
+</div>
+
+<app-create-edit-course-modal
+  (onSubmitCreate)="createCourse($event)"
+  (onSubmitEdit)="editCourse($event)"
+></app-create-edit-course-modal>

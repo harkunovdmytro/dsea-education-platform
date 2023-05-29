@@ -1,0 +1,61 @@
+<ngx-smart-modal
+    #modal
+    [identifier]="identifier"
+    [closable]="true"
+    [escapable]="true"
+    [backdrop]="true"
+    [target]="'body'"
+    (onDataAdded)="handleAddedDataModal($event)"
+    (onAnyCloseEventFinished)="handleCloseModal(); modal.removeData()"
+>
+  <div class="modal-content">
+      <div class="modal-header">
+        {{ (isForEdit ? 'Редагування' : 'Створення') + ' курсу'}}
+      </div>
+      <div class="modal-body">
+        <div class="form-wrapper">
+          <label>
+            <span>Назва</span>
+            <app-input type="text" placeholder="Название" [control]="courseForm.controls.name"></app-input>
+          </label>
+
+          <div class="teachers">
+            <ul>
+              <div class="list-header">Викладачі</div>
+              <li *ngFor="let user of freeTeachers$ | async">
+                <button (click)="moveManager(user.uuid, true)">{{user.lastName}} {{user.name}}</button>
+              </li>
+            </ul>
+
+            <ul>
+              <div class="list-header">Менеджери курсу</div>
+               <li *ngFor="let user of pickedTeachers$ | async">
+                <button (click)="moveManager(user.uuid, false)">{{user.lastName}} {{user.name}}</button>
+              </li>
+            </ul>
+          </div>
+
+          <div class="groups">
+            <ul>
+              <div class="list-header">Групи</div>
+              <li *ngFor="let group of freeGroups$ | async">
+                <button (click)="moveGroup(group.id, true)">{{group.shortName}}</button>
+              </li>
+            </ul>
+
+            <ul>
+              <div class="list-header">Обрані групи</div>
+              <li *ngFor="let group of pickedGroups$ | async">
+                <button (click)="moveGroup(group.id, false)">{{group.shortName}}</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button (onClick)="$event.preventDefault(); modal.close()">Cancel</app-button>
+        <app-button [disabled]="courseForm.invalid" (onClick)="submitForm()">Submit</app-button>
+      </div>
+  </div>
+</ngx-smart-modal>
+

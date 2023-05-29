@@ -1,0 +1,53 @@
+<ng-container *ngIf="(currentUserType$ | async) as currentUserType">
+  <aside class="sidebar">
+    <a routerLink="/dashboard" class="logo">
+      <img src="assets/images/DSEA%20LOGO.png" alt="">
+    </a>
+    <ul class="menu">
+      <ng-container *ngFor="let menuItem of menuItems; let idx = index">
+        <li *ngIf="menuItem.allowedFor <= currentUserType" class="menu-item">
+          <div class="menu-item-content">
+            <a
+              class="menu-link"
+              routerLinkActive="active"
+              [routerLink]="menuItem.link"
+            >
+            <span class="menu-link-text">{{ menuItem.name }}</span>
+          </a>
+            <button
+              *ngIf="menuItem?.subPages && menuItem?.subPages?.length"
+              class="sub-menu-toggle"
+              (click)="toggleSubMenu(idx)"
+            >
+              <svg
+                [class.opened]="menuItem?.subPagesVisible"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+              </svg>
+            </button>
+          </div>
+
+          <div *ngIf="menuItem?.subPagesVisible">
+            <ul class="sub-menu">
+            <li *ngFor="let subMenuItem of menuItem?.subPages" class="menu-item">
+              <a
+                class="menu-link"
+                routerLinkActive="active"
+                [routerLink]="[menuItem.link, subMenuItem.link]"
+              >
+                <span class="menu-link-text">{{ subMenuItem.name }}</span>
+              </a>
+            </li>
+          </ul>
+          </div>
+        </li>
+      </ng-container>
+    </ul>
+  </aside>
+</ng-container>

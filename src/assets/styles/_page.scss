@@ -1,0 +1,15 @@
+@import "variables";
+
+.page {
+  padding: 20px 30px;
+
+  h1, h2, h3, h4, h5 {
+    color: $grey-darker;
+    font-weight: $font-weight-semibold;
+  }
+
+  h1 {
+    margin-bottom: 30px;
+    font-size: 30px;
+  }
+}

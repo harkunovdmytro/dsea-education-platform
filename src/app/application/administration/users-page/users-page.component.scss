@@ -1,0 +1,51 @@
+@import "variables";
+@import "page";
+
+.faculties {
+  margin-top: 20px;
+  padding-top: 30px;
+  border-top: 1px solid $grey-darker;
+
+  .faculty-item {
+    margin-bottom: 30px;
+
+    .departments {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding-left: 20px;
+
+      .department-item {
+        padding-left: 20px;
+        margin-bottom: 20px;
+
+        .groups {
+          .group-item {
+            padding-left: 30px;
+            margin-bottom: 20px;
+
+            .users {
+              .user-item {
+                padding-left: 20px;
+                margin-bottom: 20px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .users.admins,
+  .users.teachers {
+    padding: 20px 0 5px;
+
+    .user-item {
+      margin-bottom: 20px;
+    }
+  }
+
+  .users.admins {
+    border-bottom: 1px solid $grey-darker;
+  }
+}

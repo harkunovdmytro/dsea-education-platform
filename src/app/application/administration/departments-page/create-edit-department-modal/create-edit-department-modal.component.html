@@ -1,0 +1,49 @@
+<ngx-smart-modal
+    #modal
+    [identifier]="identifier"
+    [closable]="true"
+    [escapable]="true"
+    [backdrop]="true"
+    [target]="'body'"
+    (onDataAdded)="handleAddedDataModal($event)"
+    (onAnyCloseEventFinished)="handleCloseModal(); modal.removeData()"
+>
+  <div class="modal-content">
+    <form (ngSubmit)="departmentForm.valid && submitFaculty()">
+      <div class="modal-header">
+        {{ (isForEdit ? 'Редагування' : 'Створення') + ' кафедри'}}
+      </div>
+      <div class="modal-body">
+        <div class="form-wrapper">
+          <label>
+            <span>Назва</span>
+            <app-input  type="text" placeholder="Название" [control]="departmentForm.controls.name"></app-input>
+          </label>
+          <label>
+            <span>Коротка назва</span>
+            <app-input type="text" placeholder="Короткое название" [control]="departmentForm.controls.shortName"></app-input>
+          </label>
+          <label>
+            <span>Факультет</span>
+            <select [formControl]="departmentForm.controls.facultyId">
+              <option
+                disabled
+                [value]="null"
+                [selected]="!isForEdit"
+              >Факультет</option>
+              <option *ngFor="let faculty of (faculties$ | async)" [value]="faculty.id">{{faculty.shortName}}</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button (onClick)="$event.preventDefault(); modal.close()">Cancel</app-button>
+        <app-button
+          [disabled]="departmentForm.invalid"
+          (onClick)="$event.preventDefault(); submitFaculty(); modal.close()"
+        >Submit</app-button>
+      </div>
+    </form>
+  </div>
+</ngx-smart-modal>
+

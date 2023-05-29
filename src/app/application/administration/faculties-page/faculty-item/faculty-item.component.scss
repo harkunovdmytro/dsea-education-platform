@@ -1,0 +1,63 @@
+@import "variables";
+
+.faculty-wrapper {
+  position: relative;
+  display: flex;
+  gap: 20px;
+
+  h3 {
+    flex-grow: 1;
+    margin: 0;
+    padding-top: 6px;
+    font-size: 16px;
+    font-weight: $font-weight-medium;
+  }
+
+  .more-btn {
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    width: $icon-size;
+    height: $icon-size;
+    min-width: $icon-size;
+    min-height: $icon-size;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $grey;
+    }
+
+    svg {
+      color: black;
+    }
+  }
+}
+
+.faculty-menu {
+  z-index: 1;
+  position: absolute;
+  left: calc($icon-size);
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  box-shadow: $no-color-shadow $blue-lighten;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+
+  button {
+    width: 100%;
+    background-color: inherit;
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $grey-darker;
+    }
+  }
+}

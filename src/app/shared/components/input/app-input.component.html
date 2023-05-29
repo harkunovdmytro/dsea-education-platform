@@ -1,0 +1,16 @@
+<div class="input-wrapper" [style]="inputWrapperStyles">
+  <input
+    [type]="inputType"
+    [placeholder]="placeholder"
+    [formControl]="control"
+    [style]="inputStyles"
+    [ngClass]="{
+      error: control.dirty && control.errors
+    }"
+  >
+  <div class="error" *ngIf="control.dirty && control.errors">
+    <app-input-error-messages
+      [errors]="control.errors"
+    ></app-input-error-messages>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="card">
+    <h4 class="card-header">
+            <img src="assets/images/DSEA LOGO.png" alt="">
+    </h4>
+    <div class="card-body">
+        <div class="text">Login</div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <input
+                  type="text"
+                  placeholder="Login"
+                  [formControl]="form.controls.username"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && form.controls.username.errors }"
+                />
+                <div *ngIf="submitted && form.controls.username.errors" class="invalid-feedback">
+                    <div *ngIf="form.controls.username.errors">Username is required</div>
+                </div>
+            </div>
+                      <div class="mb-3">
+                          <input
+                            type="password"
+                            placeholder="Password"
+                            formControlName="password"
+                            class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && form.controls.password.errors }"
+                          />
+                          <div *ngIf="submitted && form.controls.password.errors" class="invalid-feedback">
+                              <div *ngIf="form.controls.password.errors">Password is required</div>
+                          </div>
+                      </div>
+                      <div>
+                          <button [disabled]="loading" class="login-btn">
+                              Login
+                          </button>
+                      </div>
+        </form>
+    </div>
+</div>
+
+</div>

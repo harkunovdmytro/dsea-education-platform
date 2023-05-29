@@ -1,0 +1,73 @@
+@import "variables";
+
+$header-icon-button-size: calc($icon-size * 1.5);
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  height: $header-height;
+  padding: 10px 30px;
+  background-color: $white;
+
+  .search {
+    flex-grow: 1;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    .icon
+    .icon-svg {
+      display: inline-block;
+      height: $icon-size;
+      width: $icon-size;
+      color: $grey-darker;
+    }
+
+    .search-field {
+      flex-grow: 1;
+
+      input {
+        width: 100%;
+        border: none;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .icon-button {
+    display: flex;
+    width: $header-icon-button-size;
+    height: $header-icon-button-size;
+    border: none;
+    border-radius: 50%;
+    background: $purple;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $purple-lighter;
+    }
+
+    svg {
+      margin: auto;
+      color: $white;
+      width: 80%;
+    }
+  }
+
+  .messages {
+
+  }
+
+  .notifications {
+
+  }
+
+  .user-name {
+    color: $blue;
+  }
+
+  .user-type {
+    color: $grey-darker;
+  }
+}

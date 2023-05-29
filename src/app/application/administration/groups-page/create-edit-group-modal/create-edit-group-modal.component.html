@@ -1,0 +1,60 @@
+<ngx-smart-modal
+    #modal
+    [identifier]="identifier"
+    [closable]="true"
+    [escapable]="true"
+    [backdrop]="true"
+    [target]="'body'"
+    (onDataAdded)="handleAddedDataModal($event)"
+    (onAnyCloseEventFinished)="handleCloseModal(); modal.removeData()"
+>
+  <div class="modal-content">
+    <form (ngSubmit)="$event.preventDefault(); submitForm()">
+      <div class="modal-header">
+        {{ (isForEdit ? 'Редагування' : 'Створення') + ' групи'}}
+      </div>
+      <div class="modal-body">
+        <div class="form-wrapper">
+          <label>
+            <span>Назва</span>
+            <app-input type="text" placeholder="Название" [control]="groupForm.controls.name"></app-input>
+          </label>
+          <label>
+            <span>Коротка назва</span>
+            <app-input type="text" placeholder="Короткое название" [control]="groupForm.controls.shortName"></app-input>
+          </label>
+          <label>
+            <span>Факультет</span>
+            <select [formControl]="groupForm.controls.facultyId" (input)="groupForm.controls.departmentId.enable()">
+                 <option
+                   disabled
+                   [value]="null"
+                   [selected]="!isForEdit"
+                 >Факультет</option>
+              <option *ngFor="let faculty of (faculties$ | async)" [value]="faculty.id">{{faculty.shortName}}</option>
+            </select>
+          </label>
+          <label>
+            <span>Кафедра</span>
+            <select [formControl]="groupForm.controls.departmentId">
+              <option
+                disabled
+                [value]="null"
+                [selected]="!isForEdit"
+              >Кафедра</option>
+              <option
+                *ngFor="let department of (departments$ | async)"
+                [value]="department.id"
+              >{{department.shortName}}</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button (onClick)="$event.preventDefault(); modal.close()">Cancel</app-button>
+        <app-button [disabled]="groupForm.invalid">Submit</app-button>
+      </div>
+    </form>
+  </div>
+</ngx-smart-modal>
+
